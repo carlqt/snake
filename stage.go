@@ -3,13 +3,20 @@ package main
 import "fmt"
 
 // 10x20
-type Stage [][]string
+// type Stage [][]string
+
+type Stage struct {
+	Grid [][]string
+}
 
 func NewStage(l int, w int) *Stage {
-	stage := make(Stage, l)
+	// stage := make(Stage, l)
+	var stage Stage
 
-	for i := range stage {
-		stage[i] = make([]string, w)
+	stage.Grid = make([][]string, l)
+
+	for i := range stage.Grid {
+		stage.Grid[i] = make([]string, w)
 	}
 
 	return &stage
@@ -20,7 +27,8 @@ func (s *Stage) DisplayObject(obj []Point) {
 		x := p.X
 		y := p.Y
 
-		(*s)[y][x] = "█"
+		s.Grid[y][x] = "█"
+		// (*s.Grid)[y][x] = "█"
 	}
 }
 
@@ -38,7 +46,7 @@ func (stage *Stage) Render() {
 
 	stage.DisplayObject(obj)
 
-	for _, row := range *stage {
+	for _, row := range stage.Grid {
 		for _, column := range row {
 			fmt.Print(column)
 		}
