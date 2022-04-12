@@ -19,8 +19,9 @@ type Point struct {
 }
 
 func (s *Snake) Move() {
-	for _, b := range s.Body {
+	for i, b := range s.Body {
 		b.X++
+		s.Body[i] = b
 	}
 }
 

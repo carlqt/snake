@@ -1,5 +1,9 @@
 package main
 
+import (
+	"time"
+)
+
 func main() {
 	stage := NewStage(10, 20)
 	snake := Snake{
@@ -7,14 +11,16 @@ func main() {
 			{Y: 4, X: 1},
 			{Y: 4, X: 2},
 			{Y: 4, X: 3},
-			{Y: 4, X: 4},
-			{Y: 4, X: 5},
-			{Y: 4, X: 6},
-			{Y: 4, X: 7},
-			{Y: 4, X: 8},
 		},
 	}
 
+	stage.Clear()
 	stage.Snake = snake
-	stage.Render()
+
+	for x := 5; x >= 0; x-- {
+		stage.Render()
+		stage.Snake.Move()
+		// fmt.Print("\033[u\033[K")
+		time.Sleep(500 * time.Millisecond)
+	}
 }

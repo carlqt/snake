@@ -37,13 +37,22 @@ func (s *Stage) SetSnake() {
 }
 
 func (stage *Stage) Render() {
+	fmt.Print("\033[u\033[K")
+	stage.Clear()
 	stage.SetSnake()
 
 	for _, row := range stage.Grid {
 		for _, column := range row {
 			fmt.Print(column)
 		}
-
 		fmt.Println("")
+	}
+}
+
+func (s *Stage) Clear() {
+	for icolumn, column := range s.Grid {
+		for irow := range column {
+			s.Grid[icolumn][irow] = "o"
+		}
 	}
 }
