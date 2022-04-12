@@ -4,9 +4,14 @@ import "fmt"
 
 // 10x20
 // type Stage [][]string
+type Renderer interface {
+	Render() []Point
+}
 
 type Stage struct {
-	Grid [][]string
+	Grid    [][]string
+	Objects []Renderer
+	Snake   Snake
 }
 
 func NewStage(l int, w int) *Stage {
@@ -22,29 +27,17 @@ func NewStage(l int, w int) *Stage {
 	return &stage
 }
 
-func (s *Stage) DisplayObject(obj []Point) {
-	for _, p := range obj {
+func (s *Stage) SetSnake() {
+	for _, p := range s.Snake.Body {
 		x := p.X
 		y := p.Y
 
 		s.Grid[y][x] = "█"
-		// (*s.Grid)[y][x] = "█"
 	}
 }
 
 func (stage *Stage) Render() {
-	obj := []Point{
-		{Y: 4, X: 1},
-		{Y: 4, X: 2},
-		{Y: 4, X: 3},
-		{Y: 4, X: 4},
-		{Y: 4, X: 5},
-		{Y: 4, X: 6},
-		{Y: 4, X: 7},
-		{Y: 4, X: 8},
-	}
-
-	stage.DisplayObject(obj)
+	stage.SetSnake()
 
 	for _, row := range stage.Grid {
 		for _, column := range row {

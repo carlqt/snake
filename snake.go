@@ -23,3 +23,7 @@ func (s *Snake) Move() {
 		b.X++
 	}
 }
+
+func (s *Snake) Render() []Point {
+	return s.Body
+}
